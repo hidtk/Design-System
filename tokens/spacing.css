@@ -1,0 +1,32 @@
+/* ===========================================================================
+   Акметрон — Spacing, radii, layout tokens
+   Spacing scale: 4 / 8 / 16 / 24 / 32 / 48 / 64. No arbitrary values.
+   Outer padding always larger than inner padding. ~60% breathing room.
+   =========================================================================== */
+
+:root {
+  /* --- Spacing scale --------------------------------------------------- */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 16px;
+  --space-4: 24px;
+  --space-5: 32px;
+  --space-6: 48px;
+  --space-7: 64px;
+  --space-8: 96px;
+  --space-9: 128px;
+
+  /* --- Radii ----------------------------------------------------------- */
+  --radius-sm: 8px;       /* small surfaces, inputs */
+  --radius-md: 12px;      /* default cards */
+  --radius-lg: 18px;      /* large panels */
+  --radius-pill: 999px;   /* tags, chips, pills */
+
+  /* --- Layout ---------------------------------------------------------- */
+  --content-max: 1200px;
+  --gutter: var(--space-6);
+
+  /* --- Border widths --------------------------------------------------- */
+  --border-thin: 1px;
+  --border-active-w: 1.5px;
+}

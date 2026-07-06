@@ -1,0 +1,17 @@
+<!-- @dsCard group="Brand" viewport="700x180" name="Puzzle texture" subtitle="Signature motif, edge-anchored, fades to center (stand-in)" -->
+<!DOCTYPE html>
+<html lang="ru"><head><meta charset="utf-8" />
+<link rel="stylesheet" href="../../styles.css" />
+<style>
+  body { margin:0; padding:0; background:var(--bg-main); }
+  .panel { position:relative; height:180px; overflow:hidden; background:var(--gradient-panel); }
+  .tex { position:absolute; top:0; right:0; width:60%; height:100%; object-fit:cover; object-position:top right; opacity:0.5;
+    -webkit-mask-image:linear-gradient(to left, #000 10%, transparent 95%); mask-image:linear-gradient(to left, #000 10%, transparent 95%); }
+  .lbl { position:absolute; left:28px; bottom:24px; font-family:var(--font-body); font-size:13px; color:var(--text-2); z-index:2; }
+</style></head>
+<body>
+  <div class="panel">
+    <img class="tex" src="../../assets/puzzle-pattern.svg" alt="" />
+    <span class="lbl">Низкая прозрачность · привязан к краю · растворяется к центру</span>
+  </div>
+</body></html>

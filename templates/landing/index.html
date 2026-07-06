@@ -1,0 +1,93 @@
+<!-- @template name="Акметрон Landing" description="Dark navy marketing landing page — hero, 7-direction grid, metrics band, CTA. Built on DS components." -->
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Акметрон — измерительное оборудование</title>
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/lucide@latest"></script>
+<script src="./ds-base.js"></script>
+<style> body { margin: 0; } </style>
+</head>
+<body>
+<div id="root"></div>
+<script type="text/babel">
+  const DIRECTIONS = [
+    { icon: "radio", title: "Телеком", desc: "Анализаторы спектра и цепей." },
+    { icon: "activity", title: "High Speed Digital", desc: "Целостность сигнала, осциллография." },
+    { icon: "flask-conical", title: "Испытательное оборудование", desc: "Климатические и механические испытания." },
+    { icon: "shield-check", title: "СПОАИ", desc: "Поверка и автоматизация измерений." },
+    { icon: "ruler", title: "Метрология", desc: "Эталоны, поверка, калибровка." },
+    { icon: "scan-eye", title: "Фотоника · Оптика", desc: "Оптические измерения и компоненты." },
+    { icon: "satellite", title: "ГНСС оборудование", desc: "Решения для спутниковой навигации." },
+  ];
+
+  function Landing() {
+    const { Button, Card, Tag, Stat, Callout, Icon } = window.DesignSystem_176d4c;
+    React.useEffect(() => { window.lucide && window.lucide.createIcons(); });
+    return (
+      <div>
+        {/* Hero */}
+        <section style={{ position: "relative", overflow: "hidden", padding: "120px 48px 88px", textAlign: "center" }}>
+          <img src="../../assets/puzzle-pattern.svg" alt="" aria-hidden="true" style={{ position: "absolute", top: 0, right: 0, width: "46%", height: "100%", objectFit: "cover", objectPosition: "top right", opacity: 0.42, WebkitMaskImage: "linear-gradient(to left,#000 4%,transparent 90%)", maskImage: "linear-gradient(to left,#000 4%,transparent 90%)" }} />
+          <div className="akm-glow" style={{ top: -180, left: -120 }} />
+          <div style={{ position: "relative", maxWidth: 900, margin: "0 auto" }}>
+            <span className="akm-eyebrow">Контрольно-измерительное оборудование</span>
+            <h1 style={{ fontFamily: "var(--font-display)", fontWeight: 900, fontSize: "clamp(44px,6vw,76px)", lineHeight: 1.02, letterSpacing: "-0.03em", marginTop: 24 }}>Измеряем точно.<br />Разрабатываем под задачу</h1>
+            <p style={{ fontFamily: "var(--font-body)", fontSize: 20, lineHeight: 1.5, color: "var(--text-2)", maxWidth: 600, margin: "32px auto 0" }}>Оборудование, разработка электроники и СВЧ-устройства — без посредников.</p>
+            <div style={{ display: "flex", gap: 16, justifyContent: "center", marginTop: 48 }}>
+              <Button variant="primary" size="lg" icon={<Icon name="calculator" size={18} stroke="#FFFFFF" />}>Получить расчёт</Button>
+              <Button variant="secondary" size="lg">Каталог</Button>
+            </div>
+          </div>
+        </section>
+
+        {/* Directions */}
+        <section style={{ padding: "80px 48px", maxWidth: 1200, margin: "0 auto" }}>
+          <div style={{ textAlign: "center", marginBottom: 56 }}>
+            <span className="akm-eyebrow">Семь направлений</span>
+            <h2 style={{ fontFamily: "var(--font-display)", fontWeight: 800, fontSize: 40, letterSpacing: "-0.02em", marginTop: 16 }}>Одна команда — весь измерительный тракт</h2>
+          </div>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill,minmax(300px,1fr))", gap: 16 }}>
+            {DIRECTIONS.map((d, i) => (
+              <Card key={d.title} variant={i === 0 ? "active" : "default"}>
+                <div style={{ display: "inline-flex", padding: 10, borderRadius: "var(--radius-md)", background: "var(--fill-blue)", border: "1px solid var(--hairline)" }}><Icon name={d.icon} size={24} /></div>
+                <h3 style={{ fontFamily: "var(--font-display)", fontWeight: 700, fontSize: 20, marginTop: 16 }}>{d.title}</h3>
+                <p style={{ fontSize: 14, lineHeight: 1.5, color: "var(--text-2)", marginTop: 8 }}>{d.desc}</p>
+              </Card>
+            ))}
+          </div>
+        </section>
+
+        {/* Metrics */}
+        <section style={{ position: "relative", overflow: "hidden", padding: "80px 48px", background: "var(--field-deep)" }}>
+          <div className="akm-glow" style={{ bottom: -200, right: -80 }} />
+          <div style={{ position: "relative", maxWidth: 1200, margin: "0 auto" }}>
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(4,1fr)", gap: 32 }}>
+              <Stat value="67 ГГц" label="Диапазон измерений" />
+              <Stat value="<1 ч" label="Расчёт проекта" />
+              <Stat value="7" label="Направлений" />
+              <Stat value="0" label="Посредников" />
+            </div>
+            <div style={{ marginTop: 48, maxWidth: 640 }}>
+              <Callout icon={<Icon name="zap" size={18} />}>Расчёт проекта — менее чем за 1 час</Callout>
+            </div>
+          </div>
+        </section>
+      </div>
+    );
+  }
+
+  window.addEventListener("DOMContentLoaded", () => {
+    const start = () => {
+      if (!window.DesignSystem_176d4c) return setTimeout(start, 40);
+      ReactDOM.createRoot(document.getElementById("root")).render(<Landing />);
+    };
+    start();
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,24 @@
+<!-- @dsCard group="Slides" viewport="1280x720" name="Section divider" subtitle="Oversized index numeral + section title" -->
+<!DOCTYPE html>
+<html lang="ru"><head><meta charset="utf-8" />
+<link rel="stylesheet" href="../styles.css" />
+<style>
+  html,body { margin:0; height:100%; }
+  .slide { position:relative; width:1280px; height:720px; background:var(--field-deep); overflow:hidden; display:flex; align-items:center; gap:64px; padding:0 96px; box-sizing:border-box; }
+  .glow { position:absolute; width:620px; height:620px; border-radius:50%; top:-160px; right:-160px; background:radial-gradient(circle, var(--blue-glow) 0%, transparent 70%); filter:blur(20px); }
+  .num { position:relative; font-family:var(--font-display); font-weight:800; font-size:340px; line-height:0.8; letter-spacing:-0.04em; color:var(--blue-light); }
+  .meta { position:relative; }
+  h2 { font-family:var(--font-display); font-weight:800; font-size:64px; letter-spacing:-0.02em; color:var(--text-1); margin:16px 0 0; max-width:480px; }
+  .p { font-family:var(--font-body); font-size:20px; line-height:1.5; color:var(--text-2); margin-top:20px; max-width:420px; }
+</style></head>
+<body>
+  <div class="slide">
+    <div class="glow"></div>
+    <div class="num">02</div>
+    <div class="meta">
+      <span class="akm-eyebrow">Раздел</span>
+      <h2>Разработка электроники на заказ</h2>
+      <p class="p">От схемотехники до серийного производства технологической оснастки</p>
+    </div>
+  </div>
+</body></html>

@@ -1,0 +1,65 @@
+/* ===========================================================================
+   Акметрон — Color tokens
+   Color is functional, not decorative. Blue = "look here". Rose = "warning".
+   Greys = secondary information. Never colorize for variety.
+   Light theme: white panels on a soft cool-grey field; navy ink; blue accent.
+   =========================================================================== */
+
+:root {
+  /* --- Surfaces (light) ------------------------------------------------ */
+  --field-deep: #E7EEF7;        /* deepest recessed field */
+  --bg-main: #F5F8FC;           /* main background */
+  --bg-main-2: #EAF1FA;         /* main background gradient end */
+  --panel-top: #FFFFFF;         /* card / panel gradient top */
+  --panel-bottom: #F6FAFD;      /* card / panel gradient bottom */
+
+  /* --- Brand ----------------------------------------------------------- */
+  --brand-blue: #004180;        /* THE Акметрон blue — logo, deep fills */
+  --brand-blue-deep: #00305E;   /* darker brand blue for depth */
+
+  /* --- Accents (blue) -------------------------------------------------- */
+  --blue: #1C6BB0;              /* primary — actions, links (white text passes AA) */
+  --blue-light: #3E8FD0;        /* hover, active highlight */
+  --blue-deep: #134E86;         /* bottom of gradients, depth */
+  --blue-glow: rgba(75, 159, 213, 0.24);
+
+  /* --- Text on light --------------------------------------------------- */
+  --text-1: #16233F;            /* primary text — brand navy */
+  --text-2: #4A5874;            /* secondary — captions, labels */
+  --text-3: #8693AD;            /* tertiary — footnotes */
+  --white: #FFFFFF;             /* pure white surface */
+
+  /* --- Hairlines / borders --------------------------------------------- */
+  --hairline: rgba(30, 60, 110, 0.12);
+  --hairline-strong: rgba(30, 60, 110, 0.22);
+
+  /* --- Alert / pain / warning (risks, problems, negatives ONLY) -------- */
+  --alert-top: #FCEEF1;
+  --alert-bottom: #FBE6EB;
+  --alert-stripe: #C0566F;
+  --alert-text: #7E2B40;
+
+  /* --- Fills ----------------------------------------------------------- */
+  --fill-faint: rgba(30, 60, 110, 0.04);     /* pill / chip fill */
+  --fill-blue: rgba(75, 159, 213, 0.12);     /* callout strip fill */
+
+  /* ====================================================================
+     Semantic aliases — reference these in components
+     ==================================================================== */
+  --surface-app: var(--bg-main);
+  --surface-app-deep: var(--field-deep);
+  --surface-card: var(--panel-top);
+  --surface-pill: var(--fill-faint);
+
+  --text-body: var(--text-1);
+  --text-muted: var(--text-2);
+  --text-faint: var(--text-3);
+  --text-accent: var(--blue);
+
+  --border-default: var(--hairline);
+  --border-active: var(--blue);
+
+  --action: var(--blue);
+  --action-hover: var(--blue-light);
+  --link: var(--blue);
+}

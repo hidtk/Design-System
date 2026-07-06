@@ -1,0 +1,18 @@
+<!-- @dsCard group="Brand" viewport="700x200" name="Surface states" subtitle="Default · active (blue glow) · alert (rose) · pill" -->
+<!DOCTYPE html>
+<html lang="ru"><head><meta charset="utf-8" />
+<link rel="stylesheet" href="../../styles.css" />
+<style>
+  body { margin:0; padding:22px; background:var(--bg-main); display:grid; grid-template-columns:1fr 1fr 1fr; gap:14px; }
+  .c { border-radius:var(--radius-md); padding:16px; min-height:90px; }
+  .def { background:var(--gradient-panel); border:1px solid var(--hairline); }
+  .act { background:var(--gradient-panel-active); border:1.5px solid var(--blue); box-shadow:var(--glow-soft); }
+  .alert { background:var(--gradient-alert); border-left:3px solid var(--alert-stripe); }
+  .lab { font-family:var(--font-display); font-weight:700; font-size:11px; letter-spacing:0.08em; text-transform:uppercase; }
+  .pill { display:inline-flex; align-items:center; padding:6px 14px; border-radius:var(--radius-pill); background:var(--fill-faint); border:1px solid var(--hairline); font-family:var(--font-body); font-size:12px; color:var(--text-2); margin-top:10px; }
+</style></head>
+<body>
+  <div class="c def"><span class="lab" style="color:var(--text-2)">Default</span><div class="pill">chip</div></div>
+  <div class="c act"><span class="lab" style="color:var(--blue-light)">Active</span><div class="pill" style="border-color:var(--blue);color:var(--blue-light);background:var(--fill-blue)">selected</div></div>
+  <div class="c alert"><span class="lab" style="color:var(--alert-text)">Alert / pain</span></div>
+</body></html>

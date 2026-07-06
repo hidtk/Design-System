@@ -1,0 +1,16 @@
+<!-- @dsCard group="Spacing" viewport="700x180" name="Shadow & glow" subtitle="Soft lifting shadows · blue selection glow" -->
+<!DOCTYPE html>
+<html lang="ru"><head><meta charset="utf-8" />
+<link rel="stylesheet" href="../../styles.css" />
+<style>
+  body { margin:0; padding:30px 24px; background:var(--bg-main); display:flex; align-items:center; gap:26px; }
+  .box { width:120px; height:84px; background:var(--gradient-panel); border:1px solid var(--hairline); border-radius:var(--radius-md); display:flex; align-items:flex-end; justify-content:center; padding-bottom:8px; }
+  .n { font-family:var(--font-display); font-weight:700; font-size:11px; color:var(--text-2); }
+  .active { border:1.5px solid var(--blue); box-shadow:var(--shadow-md), var(--glow-soft); }
+</style></head>
+<body>
+  <div class="box" style="box-shadow:var(--shadow-sm)"><span class="n">shadow-sm</span></div>
+  <div class="box" style="box-shadow:var(--shadow-md)"><span class="n">shadow-md</span></div>
+  <div class="box" style="box-shadow:var(--shadow-lg)"><span class="n">shadow-lg</span></div>
+  <div class="box active"><span class="n" style="color:var(--blue-light)">active glow</span></div>
+</body></html>

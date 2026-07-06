@@ -1,0 +1,49 @@
+/* ===========================================================================
+   Акметрон — Typography tokens
+   Headings: Montserrat (700/800/900). Body: Inter (400/500/600).
+   Uppercase eyebrow labels: Montserrat 700, wide letter-spacing.
+   =========================================================================== */
+
+:root {
+  /* --- Families -------------------------------------------------------- */
+  --font-display: "Montserrat", system-ui, sans-serif;  /* headings */
+  --font-body: "Inter", system-ui, sans-serif;          /* body */
+
+  /* --- Weights --------------------------------------------------------- */
+  --weight-regular: 400;
+  --weight-medium: 500;
+  --weight-semibold: 600;
+  --weight-bold: 700;
+  --weight-extrabold: 800;
+  --weight-black: 900;
+
+  /* --- Type scale (px) ------------------------------------------------- */
+  --size-hero: 72px;
+  --size-display: 56px;
+  --size-title: 40px;
+  --size-subtitle: 24px;
+  --size-lead: 20px;
+  --size-body: 16px;
+  --size-label: 13px;
+  --size-micro: 12px;
+  --size-numeric: 88px;       /* oversized metrics */
+
+  /* --- Line heights ---------------------------------------------------- */
+  --leading-tight: 1.05;      /* hero / display */
+  --leading-snug: 1.2;        /* titles */
+  --leading-normal: 1.5;      /* body */
+
+  /* --- Letter spacing -------------------------------------------------- */
+  --tracking-hero: -0.03em;   /* tight on big headlines */
+  --tracking-title: -0.02em;
+  --tracking-normal: 0;
+  --tracking-label: 0.27em;   /* ~3.5px at 13px — uppercase eyebrows */
+
+  /* ====================================================================
+     Semantic role aliases
+     ==================================================================== */
+  --text-hero-font: var(--weight-black) var(--size-hero) / var(--leading-tight) var(--font-display);
+  --text-title-font: var(--weight-extrabold) var(--size-title) / var(--leading-snug) var(--font-display);
+  --text-body-font: var(--weight-regular) var(--size-body) / var(--leading-normal) var(--font-body);
+  --text-label-font: var(--weight-bold) var(--size-label) / 1.2 var(--font-display);
+}

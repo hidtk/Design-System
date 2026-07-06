@@ -1,0 +1,160 @@
+<!-- @template name="Акметрон Deck" description="Light 16:9 slide deck — title, section, metrics, comparison, and pain/risk layouts." -->
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Акметрон — презентация</title>
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="./ds-base.js"></script>
+<style>
+  deck-stage:not(:defined) { visibility: hidden; }
+  html, body { margin: 0; background: #EAF1FA; }
+
+  /* ---- Slide foundations ---- */
+  .s { position: relative; width: 100%; height: 100%; overflow: hidden; box-sizing: border-box;
+       font-family: var(--font-body); color: var(--text-1); }
+  .bg-app { background: var(--gradient-app); }
+  .bg-deep { background: var(--field-deep); }
+  .pad { padding: 132px 144px; }
+  .eyebrow { font-family: var(--font-display); font-weight: 700; font-size: 22px;
+             letter-spacing: 0.27em; text-transform: uppercase; color: var(--blue-light); }
+  .tex { position: absolute; top: 0; right: 0; width: 46%; height: 100%; object-fit: cover;
+         object-position: top right; opacity: 0.42;
+         -webkit-mask-image: linear-gradient(to left, #000 4%, transparent 90%);
+                 mask-image: linear-gradient(to left, #000 4%, transparent 90%); pointer-events: none; }
+  .glow { position: absolute; width: 760px; height: 760px; border-radius: 50%;
+          background: radial-gradient(circle, var(--blue-glow) 0%, transparent 70%); filter: blur(24px); }
+  .h1 { font-family: var(--font-display); font-weight: 900; font-size: 132px; line-height: 1.0;
+        letter-spacing: -0.03em; margin: 36px 0 0; position: relative; }
+  .h2 { font-family: var(--font-display); font-weight: 800; font-size: 80px; letter-spacing: -0.02em;
+        margin: 24px 0 0; position: relative; }
+  .lead { font-family: var(--font-body); font-size: 36px; line-height: 1.5; color: var(--text-2);
+          margin-top: 40px; max-width: 920px; position: relative; }
+  .logo { position: absolute; left: 144px; bottom: 72px; }
+
+  /* metrics */
+  .mgrid { position: relative; display: grid; grid-template-columns: repeat(3, 1fr); gap: 48px; margin-top: 120px; }
+  .num { font-family: var(--font-display); font-weight: 800; font-size: 168px; line-height: 0.9;
+         letter-spacing: -0.03em; color: var(--blue); }
+  .num small { font-size: 64px; }
+  .nlab { font-family: var(--font-body); font-size: 30px; color: var(--text-2); margin-top: 16px; }
+
+  /* comparison */
+  .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; margin-top: 88px; }
+  .card { border-radius: var(--radius-lg); padding: 56px; min-height: 420px; }
+  .card-def { background: var(--gradient-panel); border: 1px solid var(--hairline); }
+  .card-act { background: var(--gradient-panel-active); border: 1.5px solid var(--blue); box-shadow: var(--glow-soft); }
+  .ct { font-family: var(--font-display); font-weight: 800; font-size: 44px; margin: 18px 0 0; }
+  .li { font-family: var(--font-body); font-size: 28px; line-height: 1.5; color: var(--text-2);
+        display: flex; align-items: flex-start; gap: 18px; margin-top: 26px; }
+  .dot { width: 11px; height: 11px; border-radius: 999px; background: var(--blue); margin-top: 13px; flex-shrink: 0; }
+
+  /* section */
+  .sec { display: flex; align-items: center; gap: 88px; height: 100%; padding: 0 144px; box-sizing: border-box; }
+  .secnum { font-family: var(--font-display); font-weight: 800; font-size: 480px; line-height: 0.8;
+            letter-spacing: -0.04em; color: var(--blue); position: relative; }
+
+  /* pain */
+  .rows { display: flex; flex-direction: column; gap: 28px; margin-top: 72px; }
+  .pcard { background: var(--gradient-alert); border: 1px solid rgba(201,122,142,0.28);
+           border-left: 5px solid var(--alert-stripe); border-radius: var(--radius-md); padding: 40px 48px; }
+  .ph { font-family: var(--font-display); font-weight: 700; font-size: 22px; letter-spacing: 0.1em;
+        text-transform: uppercase; color: var(--alert-text); }
+  .pp { font-family: var(--font-body); font-size: 30px; line-height: 1.4; color: var(--alert-text);
+        opacity: 0.9; margin-top: 12px; }
+
+  @media (prefers-reduced-motion: no-preference) {
+    [data-deck-active] .h1, [data-deck-active] .h2, [data-deck-active] .lead,
+    [data-deck-active] .mgrid, [data-deck-active] .cols, [data-deck-active] .rows {
+      animation: akm-enter 600ms var(--ease-out) both;
+    }
+  }
+</style>
+</head>
+<body>
+<deck-stage width="1920" height="1080">
+
+  <!-- 1 · Title -->
+  <section data-label="Title">
+    <div class="s bg-app pad" style="display:flex;flex-direction:column;justify-content:center;">
+      <img class="tex" src="../../assets/puzzle-pattern.svg" alt="" />
+      <div class="glow" style="bottom:-380px;left:-220px;"></div>
+      <span class="eyebrow" style="position:relative;">Контрольно-измерительное оборудование</span>
+      <h1 class="h1">Измеряем точно.<br />Разрабатываем под задачу</h1>
+      <p class="lead">Оборудование, разработка электроники и СВЧ-устройства — без посредников</p>
+      <span class="akm-logo logo" style="font-size:48px;"><img src="../../assets/logo-mark.png" alt="" /><span>АКМЕТРОН</span></span>
+    </div>
+  </section>
+
+  <!-- 2 · Section divider -->
+  <section data-label="Раздел">
+    <div class="s bg-deep">
+      <div class="glow" style="top:-220px;right:-220px;"></div>
+      <div class="sec">
+        <div class="secnum">01</div>
+        <div style="position:relative;">
+          <span class="eyebrow">Раздел</span>
+          <h2 class="h2" style="max-width:640px;">Разработка электроники на заказ</h2>
+          <p class="lead" style="max-width:560px;">От схемотехники до серийного производства оснастки</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3 · Metrics -->
+  <section data-label="Метрики">
+    <div class="s bg-app pad">
+      <div class="glow" style="bottom:-360px;right:160px;"></div>
+      <span class="eyebrow">Возможности</span>
+      <h2 class="h2" style="max-width:1100px;">Весь измерительный тракт — из одних рук</h2>
+      <div class="mgrid">
+        <div><div class="num">67<small> ГГц</small></div><div class="nlab">Диапазон измерений</div></div>
+        <div><div class="num">&lt;1<small> ч</small></div><div class="nlab">Расчёт проекта</div></div>
+        <div><div class="num">7</div><div class="nlab">Направлений компании</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4 · Comparison -->
+  <section data-label="Сравнение">
+    <div class="s bg-app pad">
+      <span class="eyebrow">Сравнение</span>
+      <h2 class="h2">Импорт или разработка под задачу</h2>
+      <div class="cols">
+        <div class="card card-def">
+          <span class="eyebrow" style="color:var(--text-2);font-size:18px;">Импортная поставка</span>
+          <div class="ct">Готовый прибор</div>
+          <div class="li"><span class="dot"></span>Сроки поставки до 6 месяцев</div>
+          <div class="li"><span class="dot"></span>Зависимость от валютного курса</div>
+          <div class="li"><span class="dot"></span>Сервис через посредника</div>
+        </div>
+        <div class="card card-act">
+          <span class="eyebrow" style="font-size:18px;">Акметрон</span>
+          <div class="ct">Разработка под задачу</div>
+          <div class="li"><span class="dot"></span>Расчёт проекта менее чем за час</div>
+          <div class="li"><span class="dot"></span>Прямая работа с инженерами</div>
+          <div class="li"><span class="dot"></span>Оснастка и сервис на месте</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5 · Pain / risk -->
+  <section data-label="Проблема">
+    <div class="s bg-app pad">
+      <span class="eyebrow" style="color:var(--alert-stripe);">Проблема</span>
+      <h2 class="h2" style="max-width:1100px;">Где традиционный путь подводит</h2>
+      <div class="rows">
+        <div class="pcard"><div class="ph">Сроки</div><p class="pp">Поставка импортных приборов — до 6 месяцев ожидания</p></div>
+        <div class="pcard"><div class="ph">Сервис</div><p class="pp">Ремонт и поверка через посредника — простой оборудования</p></div>
+        <div class="pcard"><div class="ph">Гибкость</div><p class="pp">Нестандартную конфигурацию заказать негде</p></div>
+      </div>
+    </div>
+  </section>
+
+</deck-stage>
+<script src="./deck-stage.js"></script>
+</body>
+</html>

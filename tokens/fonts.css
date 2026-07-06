@@ -1,0 +1,9 @@
+/* ===========================================================================
+   Акметрон — Webfonts
+   Montserrat (headings) + Inter (body), per brand spec, loaded from Google
+   Fonts. The @font-face rules below are pulled in via @import so the compiler
+   ships them to consumers.
+   NOTE: substitute self-hosted .woff2 binaries here if the brand provides them.
+   =========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Montserrat:wght@700;800;900&display=swap');

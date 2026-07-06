@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<style data-omelette-print-defaults>
+@media print {
+  @page { margin: 0.5in; }
+  h1, h2, h3, h4, h5, h6 { break-after: avoid; }
+  figure, table, pre, blockquote, img, svg, tr, [class~="card" i] { break-inside: avoid; }
+  img, svg { max-width: 100%; }
+  p { orphans: 3; widows: 3; }
+}
+</style>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Акметрон Design System — Инструкция по использованию</title>
+<link rel="stylesheet" href="styles.css" />
+<style>
+  body {
+    margin: 0;
+    background:
+      radial-gradient(1200px 600px at 100% -10%, rgba(75,159,213,0.10), transparent 60%),
+      linear-gradient(135deg, var(--bg-main), var(--bg-main-2));
+    color: var(--text-1);
+    font-family: var(--font-body, "Inter", system-ui, sans-serif);
+    -webkit-font-smoothing: antialiased;
+    min-height: 100vh;
+  }
+  .wrap { max-width: 880px; margin: 0 auto; padding: 80px 32px 120px; }
+
+  .eyebrow {
+    font-family: var(--font-display, "Montserrat", sans-serif);
+    font-weight: 700; text-transform: uppercase;
+    letter-spacing: 0.27em; font-size: 12px;
+    color: var(--blue-light); margin: 0 0 20px;
+  }
+  h1 {
+    font-family: var(--font-display, "Montserrat", sans-serif);
+    font-weight: 900; font-size: clamp(40px, 6vw, 64px);
+    line-height: 1.03; letter-spacing: -0.03em; margin: 0;
+  }
+  .lede {
+    font-size: 19px; line-height: 1.55; color: var(--text-2);
+    max-width: 620px; margin: 28px 0 0;
+  }
+
+  h2 {
+    font-family: var(--font-display, "Montserrat", sans-serif);
+    font-weight: 800; font-size: 26px; letter-spacing: -0.01em;
+    margin: 0 0 4px; display: flex; align-items: baseline; gap: 14px;
+  }
+  h2 .num {
+    font-size: 15px; font-weight: 800; color: var(--blue-light);
+    font-variant-numeric: tabular-nums;
+    border: 1px solid var(--hairline-strong); border-radius: 999px;
+    width: 34px; height: 34px; display: inline-flex;
+    align-items: center; justify-content: center; flex: none;
+    background: var(--fill-blue);
+  }
+  h3 {
+    font-family: var(--font-display, "Montserrat", sans-serif);
+    font-weight: 700; font-size: 16px; margin: 0 0 8px; color: var(--text-1);
+  }
+  p { line-height: 1.6; color: var(--text-2); }
+  p strong, li strong { color: var(--text-1); font-weight: 600; }
+
+  .section {
+    margin-top: 56px;
+    background: linear-gradient(160deg, var(--panel-top), var(--panel-bottom));
+    border: 1px solid var(--hairline);
+    border-radius: 18px;
+    padding: 36px 38px;
+    box-shadow: 0 10px 30px rgba(20,40,80,0.10);
+  }
+  .section.flat { background: none; border: none; box-shadow: none; padding: 0 4px; }
+
+  .badge {
+    display: inline-block; font-family: var(--font-display, sans-serif);
+    font-weight: 700; font-size: 11px; text-transform: uppercase;
+    letter-spacing: 0.12em; color: var(--blue-light);
+    background: var(--fill-blue); border: 1px solid var(--hairline);
+    border-radius: 999px; padding: 5px 12px; margin-bottom: 18px;
+  }
+
+  ol.steps { list-style: none; counter-reset: s; margin: 8px 0 0; padding: 0; }
+  ol.steps > li {
+    counter-increment: s; position: relative;
+    padding: 0 0 22px 44px; line-height: 1.6; color: var(--text-2);
+  }
+  ol.steps > li::before {
+    content: counter(s); position: absolute; left: 0; top: -2px;
+    width: 28px; height: 28px; border-radius: 999px;
+    background: var(--blue); color: #06101f;
+    font-family: var(--font-display, sans-serif); font-weight: 800; font-size: 14px;
+    display: flex; align-items: center; justify-content: center;
+  }
+  ol.steps > li:last-child { padding-bottom: 0; }
+  ol.steps > li::after {
+    content: ""; position: absolute; left: 13px; top: 30px; bottom: 6px;
+    width: 1px; background: var(--hairline);
+  }
+  ol.steps > li:last-child::after { display: none; }
+
+  code, kbd {
+    font-family: ui-monospace, "SF Mono", Menlo, monospace;
+    font-size: 0.88em; color: var(--blue-light);
+    background: rgba(75,159,213,0.10); border: 1px solid var(--hairline);
+    border-radius: 6px; padding: 2px 7px;
+  }
+  pre {
+    background: var(--field-deep); border: 1px solid var(--hairline);
+    border-radius: 12px; padding: 18px 20px; overflow-x: auto;
+    margin: 16px 0 0; line-height: 1.6;
+  }
+  pre code {
+    background: none; border: none; padding: 0; color: var(--text-1);
+    font-size: 13.5px; display: block; white-space: pre;
+  }
+  pre code .c { color: var(--text-3); }
+  pre code .b { color: var(--blue-light); }
+
+  .callout {
+    background: var(--fill-blue); border: 1px solid var(--blue-deep);
+    border-radius: 12px; padding: 18px 22px; margin-top: 20px;
+    color: var(--text-1); line-height: 1.55; font-size: 15px;
+  }
+  .callout strong { color: var(--blue-light); }
+
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 8px; }
+  .mini {
+    border: 1px solid var(--hairline); border-radius: 12px; padding: 16px 18px;
+    background: var(--fill-faint);
+  }
+  .mini h3 { margin-bottom: 6px; }
+  .mini p { margin: 0; font-size: 14px; }
+  .mini .tag { font-size: 12px; color: var(--blue-light); font-family: var(--font-display, sans-serif); font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; }
+
+  .divider { height: 1px; background: var(--hairline); margin: 14px 0 0; border: none; }
+  .id { color: var(--blue-light); font-family: ui-monospace, monospace; }
+  ul.clean { padding-left: 18px; }
+  ul.clean li { line-height: 1.6; color: var(--text-2); margin-bottom: 6px; }
+  @media (max-width: 620px) { .grid2 { grid-template-columns: 1fr; } .section { padding: 26px 22px; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <p class="eyebrow">Акметрон · Design System</p>
+  <h1>Как подключить и использовать систему</h1>
+  <p class="lede">Эта дизайн-система самодостаточна: один файл стилей <code>styles.css</code>, собранная библиотека компонентов и два готовых шаблона. Ниже — три способа применить её в других проектах: от самого простого до варианта для разработчиков.</p>
+
+  <!-- WHAT YOU GET -->
+  <div class="section">
+    <span class="badge">Что внутри</span>
+    <div class="grid2">
+      <div class="mini">
+        <span class="tag">Токены</span>
+        <h3>Цвет · Тип · Отступы</h3>
+        <p>CSS-переменные: цвета (<code>--blue</code>, <code>--text-1</code>), шрифты Montserrat / Inter, шкала отступов 4–64.</p>
+      </div>
+      <div class="mini">
+        <span class="tag">Компоненты</span>
+        <h3>React-примитивы</h3>
+        <p>Button, Card, Tag, Badge, Callout, Stat, Input, Icon — в <code>window.DesignSystem_176d4c</code>.</p>
+      </div>
+      <div class="mini">
+        <span class="tag">Шаблоны</span>
+        <h3>Deck · Landing</h3>
+        <p>Навигационный дек 16:9 и маркетинговый лендинг — копируешь папку и правишь контент.</p>
+      </div>
+      <div class="mini">
+        <span class="tag">Ассеты</span>
+        <h3>Лого · Текстура</h3>
+        <p>Логотип-марка, lockup и фирменная «пазловая» текстура в папке <code>assets/</code>.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- METHOD 1 -->
+  <div class="section">
+    <span class="badge">Способ 1 · Рекомендуется</span>
+    <h2><span class="num">01</span>Привязать как дизайн-систему</h2>
+    <p>Самый простой путь — никакого кода. В новом проекте система подключается одним выбором, и дальше всё подтягивается автоматически.</p>
+    <ol class="steps">
+      <li>Создайте <strong>новый проект</strong> (или откройте существующий).</li>
+      <li>В настройках проекта <strong>прикрепите дизайн-систему</strong> «Акметрон Design System» — так же, как она прикреплена к этому разговору. В списке найдёте её по названию или по ID <span class="id">b1016101…b534c39b</span>.</li>
+      <li>Просто пишите задачу обычным языком: <em>«Сделай лендинг для направления ГНСС»</em> или <em>«Собери дек на 10 слайдов про метрологию»</em>.</li>
+      <li>Готово. Цвета, шрифты, отступы, компоненты и шаблоны применяются <strong>автоматически</strong> — изобретать стиль заново не нужно.</li>
+    </ol>
+    <div class="callout"><strong>Почему так лучше всего:</strong> привязка держит единый визуальный язык во всех проектах. Поменяете токен в системе — и обновление можно прокатить по всем потребителям.</div>
+  </div>
+
+  <!-- METHOD 2 -->
+  <div class="section">
+    <span class="badge">Способ 2 · Для быстрого старта</span>
+    <h2><span class="num">02</span>Начать с готового шаблона</h2>
+    <p>Если нужен конкретный формат — дек или лендинг — стартуйте прямо с шаблона. В привязанном проекте система лежит в папке <code>_ds/&lt;имя&gt;</code>.</p>
+    <ol class="steps">
+      <li>Скопируйте папку <code>templates/deck/</code> или <code>templates/landing/</code> в свой проект.</li>
+      <li>Откройте рядом лежащий <code>ds-base.js</code> и поправьте одну строку <code>base</code>, чтобы она указывала на привязанную систему:</li>
+    </ol>
+<pre><code><span class="c">// templates/landing/ds-base.js — было (внутри самой системы):</span>
+const base = <span class="b">'../..'</span>;
+
+<span class="c">// стало (в проекте-потребителе, страница в корне):</span>
+const base = <span class="b">'_ds/akmetron'</span>;
+
+<span class="c">// если страница лежит на уровень глубже:</span>
+const base = <span class="b">'../_ds/akmetron'</span>;</code></pre>
+    <p style="margin-top:18px">Дальше правьте контент в <code>index.html</code> — массив направлений, заголовки, метрики. Разметка и компоненты уже на месте.</p>
+  </div>
+
+  <!-- METHOD 3 -->
+  <div class="section">
+    <span class="badge">Способ 3 · Для разработчиков</span>
+    <h2><span class="num">03</span>Скачать или вынести в GitHub</h2>
+    <p>Нужен, только если систему надо отдать наружу — команде разработки или на отдельный хостинг. Скачиваете архив проекта и заливаете в репозиторий.</p>
+<pre><code><span class="c"># распакуйте архив, зайдите в папку:</span>
+git init
+git add .
+git commit -m <span class="b">"Акметрон Design System"</span>
+git branch -M main
+git remote add origin https://github.com/<span class="b">ВАШ_ЛОГИН</span>/<span class="b">ВАШ_РЕПО</span>.git
+git push -u origin main</code></pre>
+    <p style="margin-top:18px">В коде потребителя подключение — две строки в <code>&lt;head&gt;</code>:</p>
+<pre><code><span class="c">&lt;!-- глобальные стили: токены, шрифты, базовые правила --&gt;</span>
+&lt;link rel=<span class="b">"stylesheet"</span> href=<span class="b">"styles.css"</span>&gt;
+
+<span class="c">&lt;!-- библиотека компонентов (после React + ReactDOM UMD) --&gt;</span>
+&lt;script src=<span class="b">"_ds_bundle.js"</span>&gt;&lt;/script&gt;</code></pre>
+    <div class="callout">Компоненты React живут в глобале <strong>window.DesignSystem_176d4c</strong>. Для иконок дополнительно подключите Lucide: <code>&lt;script src="https://unpkg.com/lucide@latest"&gt;</code>.</div>
+  </div>
+
+  <!-- CHEATSHEET -->
+  <div class="section">
+    <span class="badge">Шпаргалка</span>
+    <h2><span class="num">04</span>Что под рукой</h2>
+
+    <h3 style="margin-top:18px">Ключевые токены</h3>
+    <ul class="clean">
+      <li><code>--blue</code> · <code>--blue-light</code> — функциональный акцент «смотри сюда»</li>
+      <li><code>--text-1</code> → <code>--text-2</code> → <code>--text-3</code> — три ступени текста</li>
+      <li><code>--panel-top</code> / <code>--panel-bottom</code> — градиент панелей и карточек</li>
+      <li><code>--alert-stripe</code>, <code>--alert-text</code> — <strong>только</strong> для рисков и проблем</li>
+      <li><code>--font-display</code> (Montserrat) · <code>--font-body</code> (Inter)</li>
+    </ul>
+
+    <hr class="divider" />
+
+    <h3 style="margin-top:18px">Компоненты — пример вызова</h3>
+<pre><code><span class="c">const</span> { Button, Card, Stat, Callout, Icon } = window.<span class="b">DesignSystem_176d4c</span>;
+
+&lt;Card&gt;
+  &lt;Stat value=<span class="b">"67 ГГц"</span> label=<span class="b">"диапазон"</span> /&gt;
+  &lt;Button&gt;Получить расчёт&lt;/Button&gt;
+&lt;/Card&gt;</code></pre>
+
+    <div class="callout" style="margin-top:24px">
+      <strong>Главные правила бренда:</strong> цвет функционален, не декоративен · никаких эмодзи · заголовки без точки · числа конкретны (<code>&lt;1 ч</code>, не «быстро») · ~60% воздуха в макете.
+    </div>
+  </div>
+
+  <p style="text-align:center; color:var(--text-3); font-size:13px; margin-top:48px;">Акметрон Design System · единый файл <code>styles.css</code> + <code>_ds_bundle.js</code></p>
+
+</div>
+<script>
+(async () => {
+  if (!document.title || !document.title.trim()) document.title = "Инструкция - как использовать систему";
+  // Prepend so page-supplied @page / break rules (deck-stage's margin:0,
+  // author CSS) keep source-order precedence over the baseline.
+  const baseCss = document.createElement('style');
+  baseCss.textContent = "@media print {\n  figure, table { break-inside: avoid; }\n  *, *::before, *::after {\n    print-color-adjust: exact; -webkit-print-color-adjust: exact;\n    backdrop-filter: none !important; -webkit-backdrop-filter: none !important;\n    animation-delay: -99s !important; animation-duration: .001s !important;\n    animation-iteration-count: 1 !important; animation-fill-mode: both !important;\n    animation-play-state: running !important; transition-duration: 0s !important;\n  }\n}";
+  document.head.prepend(baseCss);
+  if (document.readyState === 'loading') {
+    await new Promise((r) => document.addEventListener('DOMContentLoaded', r, { once: true }));
+  }
+  let ds = document.querySelector('deck-stage');
+  // whenDefined never resolves when nothing registers the element, so only
+  // await it when a <deck-stage> tag exists (and race a timeout regardless).
+  if (ds && !customElements.get('deck-stage')) {
+    try {
+      await Promise.race([
+        customElements.whenDefined('deck-stage'),
+        new Promise((r) => setTimeout(r, 3000)),
+      ]);
+    } catch (e) {}
+    ds = document.querySelector('deck-stage');
+  }
+  // dc-runtime assigns window.DCLogic at init and mounts into #dc-root on
+  // DOMContentLoaded; settle on that subtree so React has rendered before
+  // print(). Non-DC pages fall through to weighing body.
+  const isDc = !ds && 'DCLogic' in window;
+  const settleRoot = ds || (isDc ? document.getElementById('dc-root') : null) || document.body;
+  if (settleRoot) {
+    // Weigh only content children — skip script/style/template so inline
+    // Babel/CSS doesn't register as stable "content" before the framework
+    // has mounted anything.
+    const MEDIA = 'img,svg,canvas,video,picture,iframe,embed,object';
+    const weigh = () => {
+      let text = 0, media = 0;
+      for (const c of settleRoot.children) {
+        const t = c.tagName;
+        if (t === 'SCRIPT' || t === 'STYLE' || t === 'TEMPLATE') continue;
+        text += (c.textContent || '').trim().length;
+        media += c.querySelectorAll(MEDIA).length + (c.matches(MEDIA) ? 1 : 0);
+      }
+      return text + media * 100;
+    };
+    // "Non-zero and stable" alone is not sufficient to mean rendered: generic
+    // body can carry a static shell while async main content is pending, and
+    // #dc-root can carry the root DC's static text while child refs are still
+    // .sc-placeholder boxes. Gate generic on readyState 'complete', and never
+    // accept stability while a dc-runtime placeholder is present.
+    const isGeneric = settleRoot === document.body;
+    const deadline = Date.now() + 15000;
+    let last = -1, stable = 0;
+    while (Date.now() < deadline) {
+      const n = weigh();
+      const ready =
+        (!isGeneric || document.readyState === 'complete') &&
+        !settleRoot.querySelector('.sc-placeholder');
+      if (n > 0 && n === last && ready) { if (++stable >= 2) break; } else { stable = 0; }
+      last = n;
+      await new Promise((r) => setTimeout(r, 250));
+    }
+  }
+  // Project support.js may predate runtime default-seeding; push via bridge.
+  if (isDc && window.__dcSetProps && window.__dcRootName) {
+    try {
+      const dpEl = document.querySelector('script[data-dc-script]');
+      const meta = JSON.parse((dpEl && dpEl.getAttribute('data-props')) || '{}');
+      const bag = {};
+      for (const k in meta)
+        if (k[0] !== '$' && meta[k] && meta[k].default !== undefined)
+          bag[k] = meta[k].default;
+      if (Object.keys(bag).length) {
+        window.__dcSetProps(window.__dcRootName(), bag);
+        await new Promise((r) => setTimeout(r, 50));
+      }
+    } catch (e) {}
+  }
+  // Reveal content gated on scroll or visibility before printing. Lazy <img>,
+  // IntersectionObserver fade-ins, and collapsed <details> don't render while
+  // off-screen, so a long page would print with them blank or closed. Open
+  // every <details>, force native-lazy images eager, and scroll the document
+  // through its full height to trip lazy-load + IO; then wait (bounded) for the
+  // newly-triggered images. Inert for deck-stage (slides aren't scroll-gated).
+  try {
+    for (const d of document.querySelectorAll('details')) d.open = true;
+    for (const img of document.querySelectorAll('img[loading="lazy"]'))
+      img.loading = 'eager';
+    const scroller = document.scrollingElement || document.documentElement;
+    const full = Math.max(scroller.scrollHeight, document.body.scrollHeight);
+    const step = window.innerHeight || 800;
+    for (let y = 0; y <= full; y += step) {
+      window.scrollTo(0, y);
+      await new Promise((r) => requestAnimationFrame(r));
+    }
+    window.scrollTo(0, 0);
+    await Promise.race([
+      Promise.all(
+        [...document.images].map((img) =>
+          img.complete
+            ? null
+            : new Promise((res) => {
+                img.addEventListener('load', res, { once: true });
+                img.addEventListener('error', res, { once: true });
+              })
+        )
+      ),
+      new Promise((r) => setTimeout(r, 4000)),
+    ]);
+  } catch (e) {}
+  try { await document.fonts.ready; } catch (e) {}
+  // Jump every animation to its end state so print() never captures a slide
+  // mid-entrance. Ordering matters: the 0s-transition style must be live
+  // BEFORE data-deck-active is set so attribute-keyed transitions don't
+  // start a (now-0s) run from the pre-active base.
+  const st = document.createElement('style');
+  st.textContent = '*,*::before,*::after{animation-delay:-99s !important;animation-duration:.001s !important;animation-iteration-count:1 !important;animation-fill-mode:both !important;animation-play-state:running !important;transition-duration:0s !important}';
+  document.head.appendChild(st);
+  for (const d of document.querySelectorAll('deck-stage')) {
+    for (const c of d.children) {
+      const t = c.tagName;
+      if (t === 'SCRIPT' || t === 'STYLE' || t === 'TEMPLATE') continue;
+      c.setAttribute('data-deck-active', '');
+    }
+  }
+  // Re-append deck-stage's @page last so no author @page can add a margin and
+  // spill each full-bleed slide onto two sheets. Backstop for old copies.
+  if (ds) {
+    let pg = document.getElementById('deck-stage-print-page');
+    if (!pg) {
+      pg = document.createElement('style');
+      pg.textContent = '@page{size:' + (+ds.getAttribute('width') || 1920) +
+        'px ' + (+ds.getAttribute('height') || 1080) + 'px;margin:0}';
+    }
+    document.body.appendChild(pg);
+  }
+  try {
+    const sweep = () => {
+      for (const a of document.getAnimations()) {
+        try { a.finish(); } catch (e) {
+          try { a.currentTime = (a.effect && a.effect.getComputedTiming().duration) || 0; a.pause(); } catch (e2) {}
+        }
+      }
+    };
+    sweep();
+    await new Promise((r) => requestAnimationFrame(r));
+    sweep();
+    await new Promise((r) => requestAnimationFrame(r));
+  } catch (e) {}
+  // Size the PDF page to the rendered design unless the file opted into
+  // standard paper via @page{size:letter|A4|…}. Decks own their own @page.
+  // Wrappers (body, …) lose padding+margin so the frame sits at (0,0); the
+  // frame itself loses only margin — its padding is INSIDE the measured
+  // rect and must stay, or content shifts and leaves a gap at bottom/right.
+  var __m = null;
+  try { __m = (() => {
+  var STAMP = true;
+  var docEl = document.documentElement;
+  var doc = { width: docEl.scrollWidth, height: docEl.scrollHeight };
+
+  var ds = document.querySelector('deck-stage');
+  if (ds) {
+    var dw = Number(ds.getAttribute('width')) || 1920;
+    var dh = Number(ds.getAttribute('height')) || 1080;
+    var n = typeof ds.length === 'number' ? ds.length : ds.children.length;
+    var idx = typeof ds.index === 'number' ? ds.index : 0;
+    var frames = [];
+    for (var i = 0; i < n; i++) frames.push({ left: 0, top: 0, width: dw, height: dh });
+    return { kind: 'deck', source: 'declared', doc: doc, frames: frames,
+      authored: frames.map(function(){return{width:true,height:true}}),
+      deck: { width: dw, height: dh, slideCount: n, index: idx },
+      signals: { paperPage: false, pxPage: false } };
+  }
+
+  // Declared kind: a doc-page tag names the kind outright, so no signal
+  // heuristics run (like the deck branch above, signals report false —
+  // they describe inferred classifications only). The tag alone is not
+  // trusted: the element must have upgraded (shadowRoot present), so a
+  // leftover tag whose script was deleted falls through to the heuristics
+  // that handle plain markup.
+  var stageSx = window.scrollX || 0, stageSy = window.scrollY || 0;
+  var dp = document.querySelector('doc-page');
+  if (dp && dp.shadowRoot) {
+    // Crop to the sheet, not the host — the desk around it is screen-only
+    // chrome that must not land in PNG exports.
+    var sheet = dp.shadowRoot.querySelector('.sheet');
+    var sr = (sheet || dp).getBoundingClientRect();
+    return { kind: 'paper-doc', source: 'declared', doc: doc,
+      frames: [{ left: sr.left + stageSx, top: sr.top + stageSy,
+        width: sr.width, height: sr.height }],
+      authored: [{ width: false, height: false }],
+      signals: { paperPage: false, pxPage: false } };
+  }
+  var paperPage = false, pxPage = false;
+  var eachRule = function (fn) {
+    for (var s = 0; s < document.styleSheets.length; s++) {
+      var rs; try { rs = document.styleSheets[s].cssRules; } catch (e) { continue; }
+      for (var r = 0; r < rs.length; r++) {
+        fn(rs[r]);
+        if (rs[r].cssRules) for (var n = 0; n < rs[r].cssRules.length; n++) fn(rs[r].cssRules[n]);
+      }
+    }
+  };
+  eachRule(function (r) {
+    if (r.type !== 6) return;
+    var m = /\bsize\s*:\s*([^;}]+)/i.exec(r.cssText || '');
+    if (!m) return;
+    if (/\b(letter|a[3-5]|legal|ledger)\b/i.test(m[1])) paperPage = true;
+    if (/\d+(?:\.\d+)?px\b/i.test(m[1])) pxPage = true;
+  });
+  var signals = { paperPage: paperPage, pxPage: pxPage };
+
+  var pxVal = function (v) {
+    var m = /^(\d+(?:\.\d+)?)px$/.exec(v || ''); return m ? +m[1] : 0;
+  };
+  var authoredPx = function (el, prop) {
+    if (pxVal(el.style[prop])) return true;
+    var attr = el.getAttribute(prop);
+    if (attr && /^\d+$/.test(attr)) return true;
+    var hit = false;
+    eachRule(function (r) {
+      if (hit || r.type !== 1 || !r.style) return;
+      try { if (el.matches(r.selectorText) && pxVal(r.style[prop])) hit = true; } catch (e) {}
+    });
+    return hit;
+  };
+
+  var el = document.body, rootPxW = false;
+  for (;;) {
+    var kids = [];
+    for (var c = 0; c < el.children.length; c++) {
+      var t = el.children[c].tagName;
+      if (t !== 'SCRIPT' && t !== 'STYLE' && t !== 'TEMPLATE') kids.push(el.children[c]);
+    }
+    if (kids.length !== 1 || !(kids[0] instanceof HTMLElement)) break;
+    if (STAMP) el.setAttribute('data-om-frame-wrap', '');
+    el = kids[0];
+    rootPxW = authoredPx(el, 'width');
+    if (rootPxW) break;
+  }
+  if (!rootPxW) rootPxW = authoredPx(el, 'width');
+
+  // @page{size:letter} alone is a flowing doc; with a px-width root it's a
+  // fixed sheet pretending to be paper — fall through and size to render.
+  if (paperPage && !rootPxW) {
+    return { kind: 'paper-doc', source: 'inferred', doc: doc, signals: signals,
+      frames: [{ left: 0, top: 0, width: doc.width, height: doc.height }],
+      authored: [{ width: false, height: false }] };
+  }
+
+  var sx = window.scrollX || 0, sy = window.scrollY || 0;
+  var rectOf = function (e) {
+    var r = e.getBoundingClientRect();
+    var oy; try { oy = getComputedStyle(e).overflowY; } catch (err) {}
+    var h = oy === 'visible' ? Math.max(r.height, e.scrollHeight || 0) : r.height;
+    return { left: r.left + sx, top: r.top + sy, width: r.width, height: h };
+  };
+
+  // Multi-frame: ≥2 visible non-fixed children, each with authored px width
+  // AND height, all within ±2px of each other. Off unless the page opts in
+  // via data-om-multi-frame on the stop element — guards against card grids
+  // and pricing tables that match the geometry but aren't separate canvases.
+  if (el.hasAttribute('data-om-multi-frame')) {
+    var cands = [];
+    for (var k = 0; k < el.children.length; k++) {
+      var ch = el.children[k];
+      var cs; try { cs = getComputedStyle(ch); } catch (e) { continue; }
+      if (cs.display === 'none' || cs.visibility === 'hidden' || cs.position === 'fixed') continue;
+      var rc = rectOf(ch);
+      if (rc.width < 2 || rc.height < 2) continue;
+      if (!authoredPx(ch, 'width') || !authoredPx(ch, 'height')) continue;
+      cands.push(rc);
+    }
+    if (cands.length >= 2) {
+      var w0 = cands[0].width, h0 = cands[0].height, ok = true;
+      for (var q = 1; q < cands.length; q++)
+        if (Math.abs(cands[q].width - w0) > 2 || Math.abs(cands[q].height - h0) > 2) ok = false;
+      if (ok) return { kind: 'multi-frame', source: 'inferred', doc: doc, signals: signals,
+        frames: cands, authored: cands.map(function(){return{width:true,height:true}}) };
+    }
+  }
+
+  if (STAMP) el.setAttribute('data-om-frame', '');
+  return { kind: 'single-canvas', source: 'inferred', doc: doc, signals: signals,
+    frames: [rectOf(el)],
+    authored: [{ width: rootPxW, height: authoredPx(el, 'height') }] };
+})(); } catch (e) {}
+  var frame = null;
+  if (__m && __m.kind === 'single-canvas') {
+    var f = __m.frames && __m.frames[0];
+    if (f && f.width >= 200 && f.height >= 200) {
+      frame = f;
+      var fst = document.createElement('style');
+      fst.textContent = '@media print{@page{size:' + Math.ceil(f.width) + 'px ' +
+        Math.ceil(f.height) + 'px;margin:0}' +
+        'html,body,[data-om-frame-wrap]{padding:0!important;margin:0!important;background:none!important}' +
+        '[data-om-frame]{margin:0!important}}';
+      document.body.appendChild(fst);
+    }
+  }
+  // Relax break-inside on oversized elements. An element taller than a
+  // printable page can't honor break-inside: avoid — browsers either overflow
+  // it or push it whole to the next page, leaving a blank gap, then break it
+  // anyway at an arbitrary point. After the final layout (content revealed,
+  // animations jumped), find elements taller than a page that still compute
+  // break-inside: avoid and reset them to auto, so the browser breaks them at
+  // their children's boundaries instead (children keep their own avoid). PAGE_PX
+  // is a conservative portrait estimate at 96 CSS px/in — Letter/A4 usable
+  // height minus our 0.5in margins — so only clearly-oversized elements are
+  // touched and under-page elements still stay whole. Skipped for decks (slides
+  // are sized to the page) and for fixed-size canvases (frame set, or an author
+  // px-based @page) — runs as before for flowing docs on letter/A4.
+  try {
+    if (!ds && !frame && !(__m && __m.signals && __m.signals.pxPage)) {
+      const PAGE_PX = 1024;
+      // Our print defaults add a real @page margin only when the source has
+      // no @page of its own; computed style can't tell us (it reports screen
+      // media), so read the injected rule directly.
+      const defaults = document.querySelector('style[data-omelette-print-defaults]');
+      const pageInset = /@page\s*\{[^}]*margin/.test(defaults ? defaults.textContent || '' : '');
+      const SEL = 'section,article,figure,table,pre,blockquote,[class~="card" i],[class~="page" i],[class~="sheet" i]';
+      for (const el of document.body.querySelectorAll(SEL)) {
+        if (el instanceof HTMLElement && el.offsetHeight > PAGE_PX) {
+          el.setAttribute('data-om-oversized', '');
+          // Fake-paged docs simulate sheets with over-tall break-after:page
+          // boxes; honoring the break spills half-blank pages and ends a
+          // colored box mid-sheet. Flow them, and (only when we own the page
+          // inset) drop the redundant padding/background via the rule below.
+          const cs = getComputedStyle(el);
+          if (cs.breakAfter === 'page' || cs.pageBreakAfter === 'always') {
+            el.setAttribute('data-om-fakepage', '');
+          }
+        }
+      }
+      const ost = document.createElement('style');
+      ost.textContent = '@media print{' +
+        '[data-om-oversized]{break-inside:auto !important;page-break-inside:auto !important}' +
+        '[data-om-fakepage]{break-after:auto !important;page-break-after:auto !important}' +
+        (pageInset ? '[data-om-fakepage]{padding:0 !important;background:none !important}' : '') +
+        '}';
+      document.head.appendChild(ost);
+    }
+  } catch (e) {}
+  // macOS Preview renders Skia-PDF Luminosity soft-masks as opaque grey boxes;
+  // swap the CSS that triggers them for Preview-safe forms.
+  try {
+    for (const el of document.body.querySelectorAll('*')) {
+      const cs = getComputedStyle(el);
+
+      if (cs.boxShadow !== 'none' && cs.filter === 'none') {
+        const outs = [], kept = [];
+        for (const s of cs.boxShadow.split(/,(?![^(]*[)])/)) {
+          const t = s.trim();
+          const m = t.match(/^(rgba?[(][^)]+[)]) (-?[0-9.]+px) (-?[0-9.]+px) ([0-9.]+px) -?[0-9.]+px$/);
+          if (m && parseFloat(m[4]) > 0) outs.push('drop-shadow(' + m[2] + ' ' + m[3] + ' ' + m[4] + ' ' + m[1] + ')');
+          else kept.push(t);
+        }
+        if (outs.length) {
+          el.style.setProperty('filter', outs.join(' '), 'important');
+          el.style.setProperty('box-shadow', kept.join(', ') || 'none', 'important');
+        }
+      }
+
+      const mask = cs.maskImage && cs.maskImage !== 'none' ? cs.maskImage : cs.webkitMaskImage;
+      if (mask && mask !== 'none' && cs.filter === 'none') el.style.setProperty('filter', 'opacity(1)', 'important');
+    }
+  } catch (e) {}
+  setTimeout(() => { try { window.print(); } catch (e) {} }, 200);
+})();
+</script>
+</body>
+</html>

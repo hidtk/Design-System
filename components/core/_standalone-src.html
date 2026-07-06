@@ -1,0 +1,115 @@
+<!-- @dsCard group="Components" viewport="700x620" name="Core" subtitle="Button · Card · Tag · Badge · Callout · Stat · Input · Icon" -->
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="stylesheet" href="../../styles.css" />
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/lucide@latest"></script>
+<script src="../../_ds_bundle.js"></script>
+<style>
+  body { margin: 0; padding: 32px; }
+  .grid { display: flex; flex-direction: column; gap: 28px; max-width: 640px; }
+  .row { display: flex; flex-wrap: wrap; align-items: center; gap: 14px; }
+  .cap { font-family: var(--font-display); font-weight: 700; font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--text-3); margin-bottom: 12px; }
+  .two { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+</style>
+</head>
+<body>
+<div id="root"></div>
+<template id="__bundler_thumbnail" data-bg-color="#EAF1FA">
+  <svg viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg">
+    <rect width="1200" height="800" fill="#EAF1FA"/>
+    <circle cx="600" cy="320" r="120" fill="none" stroke="#004180" stroke-width="22"/>
+    <line x1="600" y1="200" x2="600" y2="440" stroke="#004180" stroke-width="22"/>
+    <line x1="480" y1="320" x2="720" y2="320" stroke="#004180" stroke-width="22"/>
+    <rect x="430" y="520" width="340" height="64" rx="32" fill="#1C6BB0"/>
+    <text x="600" y="700" font-family="Montserrat, sans-serif" font-weight="800" font-size="56" letter-spacing="6" fill="#16233F" text-anchor="middle">АКМЕТРОН</text>
+  </svg>
+</template>
+<script type="text/babel">
+  const { Button, Card, Tag, Badge, Callout, Stat, Input, Icon } = window.DesignSystem_176d4c;
+
+  function Demo() {
+    return (
+      <div className="grid">
+        <div>
+          <div className="cap">Button</div>
+          <div className="row">
+            <Button variant="primary" icon={<Icon name="calculator" size={18} stroke="#FFFFFF" />}>Получить расчёт</Button>
+            <Button variant="secondary">Каталог</Button>
+            <Button variant="ghost">Подробнее</Button>
+            <Button variant="primary" disabled>Недоступно</Button>
+          </div>
+          <div className="row" style={{ marginTop: 14 }}>
+            <Button size="sm" variant="secondary">sm</Button>
+            <Button size="md" variant="secondary">md</Button>
+            <Button size="lg" variant="secondary">lg</Button>
+          </div>
+        </div>
+
+        <div>
+          <div className="cap">Tag · Badge</div>
+          <div className="row">
+            <Tag active>СВЧ-устройства</Tag>
+            <Tag>Телеком</Tag>
+            <Tag>ГНСС</Tag>
+            <Tag>Фотоника</Tag>
+            <Badge tone="blue">Новинка</Badge>
+            <Badge tone="neutral">В наличии</Badge>
+            <Badge tone="alert">Снят с производства</Badge>
+          </div>
+        </div>
+
+        <div>
+          <div className="cap">Card</div>
+          <div className="two">
+            <Card>
+              <span className="akm-eyebrow">Телеком</span>
+              <h3 style={{ fontSize: 20, marginTop: 8 }}>Измерения до 67 ГГц</h3>
+              <p style={{ color: "var(--text-2)", fontSize: 14, marginTop: 8 }}>Анализаторы спектра и цепей под задачу.</p>
+            </Card>
+            <Card variant="active">
+              <span className="akm-eyebrow">Выбрано</span>
+              <h3 style={{ fontSize: 20, marginTop: 8 }}>High Speed Digital</h3>
+              <p style={{ color: "var(--text-2)", fontSize: 14, marginTop: 8 }}>Целостность сигнала, осциллография.</p>
+            </Card>
+          </div>
+          <div style={{ marginTop: 16 }}>
+            <Card variant="alert">
+              <span style={{ fontFamily: "var(--font-display)", fontWeight: 700, fontSize: 13, letterSpacing: "0.1em", textTransform: "uppercase" }}>Риск</span>
+              <p style={{ fontSize: 14, marginTop: 6 }}>Поставка импортных приборов — сроки до 6 месяцев.</p>
+            </Card>
+          </div>
+        </div>
+
+        <div>
+          <div className="cap">Callout</div>
+          <Callout icon={<Icon name="zap" size={18} />}>Расчёт проекта — менее чем за 1 час</Callout>
+        </div>
+
+        <div>
+          <div className="cap">Stat</div>
+          <div className="row" style={{ gap: 48 }}>
+            <Stat value="67 ГГц" label="Диапазон измерений" />
+            <Stat value="<1 ч" label="Расчёт проекта" />
+            <Stat value="7" label="Направлений" />
+          </div>
+        </div>
+
+        <div>
+          <div className="cap">Input</div>
+          <div style={{ maxWidth: 320 }}>
+            <Input label="Email" placeholder="you@company.ru" hint="Ответим в течение часа" />
+          </div>
+        </div>
+      </div>
+    );
+  }
+  ReactDOM.createRoot(document.getElementById("root")).render(<Demo />);
+</script>
+</body>
+</html>

@@ -1,0 +1,26 @@
+<!-- @dsCard group="Slides" viewport="1280x720" name="Metrics slide" subtitle="Oversized numerals dominant over labels" -->
+<!DOCTYPE html>
+<html lang="ru"><head><meta charset="utf-8" />
+<link rel="stylesheet" href="../styles.css" />
+<style>
+  html,body { margin:0; height:100%; }
+  .slide { position:relative; width:1280px; height:720px; background:var(--gradient-app); overflow:hidden; padding:88px 96px; box-sizing:border-box; }
+  .glow { position:absolute; width:520px; height:520px; border-radius:50%; bottom:-240px; right:120px; background:radial-gradient(circle, var(--blue-glow) 0%, transparent 70%); filter:blur(20px); }
+  h2 { position:relative; font-family:var(--font-display); font-weight:800; font-size:52px; letter-spacing:-0.02em; color:var(--text-1); margin:16px 0 0; max-width:760px; }
+  .grid { position:relative; display:grid; grid-template-columns:repeat(3,1fr); gap:32px; margin-top:88px; }
+  .num { font-family:var(--font-display); font-weight:800; font-size:128px; line-height:0.9; letter-spacing:-0.03em; color:var(--blue-light); }
+  .num small { font-size:48px; }
+  .lab { font-family:var(--font-body); font-size:20px; color:var(--text-2); margin-top:12px; }
+</style></head>
+<body>
+  <div class="slide">
+    <div class="glow"></div>
+    <span class="akm-eyebrow">Возможности</span>
+    <h2>Весь измерительный тракт — из одних рук</h2>
+    <div class="grid">
+      <div><div class="num">67<small> ГГц</small></div><div class="lab">Диапазон измерений</div></div>
+      <div><div class="num">&lt;1<small> ч</small></div><div class="lab">Расчёт проекта</div></div>
+      <div><div class="num">7</div><div class="lab">Направлений компании</div></div>
+    </div>
+  </div>
+</body></html>

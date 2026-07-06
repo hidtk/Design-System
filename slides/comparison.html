@@ -1,0 +1,38 @@
+<!-- @dsCard group="Slides" viewport="1280x720" name="Comparison slide" subtitle="Two cards side by side — active vs default" -->
+<!DOCTYPE html>
+<html lang="ru"><head><meta charset="utf-8" />
+<link rel="stylesheet" href="../styles.css" />
+<style>
+  html,body { margin:0; height:100%; }
+  .slide { position:relative; width:1280px; height:720px; background:var(--gradient-app); overflow:hidden; padding:88px 96px; box-sizing:border-box; }
+  h2 { font-family:var(--font-display); font-weight:800; font-size:52px; letter-spacing:-0.02em; color:var(--text-1); margin:16px 0 0; }
+  .cols { display:grid; grid-template-columns:1fr 1fr; gap:32px; margin-top:64px; }
+  .card { border-radius:var(--radius-lg); padding:40px; min-height:300px; }
+  .def { background:var(--gradient-panel); border:1px solid var(--hairline); }
+  .act { background:var(--gradient-panel-active); border:1.5px solid var(--blue); box-shadow:var(--glow-soft); }
+  .ct { font-family:var(--font-display); font-weight:800; font-size:30px; color:var(--text-1); margin:14px 0 0; }
+  .li { font-family:var(--font-body); font-size:19px; line-height:1.5; color:var(--text-2); display:flex; align-items:flex-start; gap:12px; margin-top:18px; }
+  .dot { width:8px; height:8px; border-radius:999px; background:var(--blue); margin-top:9px; flex-shrink:0; }
+</style></head>
+<body>
+  <div class="slide">
+    <span class="akm-eyebrow">Сравнение</span>
+    <h2>Импорт или разработка под задачу</h2>
+    <div class="cols">
+      <div class="card def">
+        <span class="akm-eyebrow" style="color:var(--text-2)">Импортная поставка</span>
+        <div class="ct">Готовый прибор</div>
+        <div class="li"><span class="dot"></span>Сроки поставки до 6 месяцев</div>
+        <div class="li"><span class="dot"></span>Зависимость от валютного курса</div>
+        <div class="li"><span class="dot"></span>Сервис через посредника</div>
+      </div>
+      <div class="card act">
+        <span class="akm-eyebrow">Акметрон</span>
+        <div class="ct">Разработка под задачу</div>
+        <div class="li"><span class="dot"></span>Расчёт проекта менее чем за час</div>
+        <div class="li"><span class="dot"></span>Прямая работа с инженерами</div>
+        <div class="li"><span class="dot"></span>Оснастка и сервис на месте</div>
+      </div>
+    </div>
+  </div>
+</body></html>
